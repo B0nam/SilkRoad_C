@@ -1,7 +1,8 @@
-#include "source/headers.h"
-#include "models/Menu.cpp"
-#include "models/User.cpp"
-#include "models/Vehicle.cpp"
+#include "Source/headers.h"
+#include "Models/Elements/Menu.cpp"
+#include "Models/Elements/FileManager.cpp"
+#include "Models/Entities/User.cpp"
+#include "Models/Entities/Vehicle.cpp"
 
 int main()
 {
@@ -14,17 +15,27 @@ int main()
 	int userMenuChoice = sMenu.getIndex();
 	int userMenuNumber = sMenu.getNumber();
 
-	User *users = new User[userMenuNumber];
 	string FirstNamePath = "../source/names/first_names.txt";
 	string LastNamePath = "../source/names/last_names.txt";
+
+	FileManager sManagerFirstName;
+	FileManager sManagerLastName;
+
+	User *users = new User[userMenuNumber];
 
 	switch (userMenuChoice)
 	{
 	case 1:
-		// O usuario escolheu gerar dados para a tabela usuario
+		sManagerFirstName.startManager(FirstNamePath); // Obtem as linhas do primeiro arquivo.
+		sManagerLastName.startManager(LastNamePath);   // Obtem as linhas do segundo arquivo.
+
+		// Gera os dados
 		for (int i = 0; i < userMenuNumber; i++)
 		{
-			users[i].generateData(FirstNamePath, LastNamePath);
+			string firtsName = sManagerFirstName.getRandomLine();
+			string lastName = sManagerLastName.getRandomLine();
+
+			users[i].generateName(firtsName, lastName);
 			cout << "" << endl;
 			cout << "### USER " << i << " ## " << endl;
 			cout << "NAME: " << users[i].getName() << endl;
@@ -32,8 +43,6 @@ int main()
 			cout << "PHONE: " << users[i].getPhone() << endl;
 			cout << "Admin: " << users[i].getAdmin() << endl;
 		}
-
-		delete[] users;
 		break;
 	case 2:
 		// O usuario escolheu gerar dados para a tabela veiculos
@@ -46,5 +55,6 @@ int main()
 		break;
 	}
 
+	delete[] users;
 	return 0;
 }
