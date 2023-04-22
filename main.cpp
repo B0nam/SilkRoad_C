@@ -1,26 +1,50 @@
 #include "source/headers.h"
 #include "models/Menu.cpp"
-#include "models/Usuario.cpp"
+#include "models/User.cpp"
+#include "models/Vehicle.cpp"
 
-int main(){
-	Menu sMenu;
-
-/*
+int main()
+{
 	srand(time(NULL));
 
-	int quantidade = 5;
+	Menu sMenu;
+	sMenu.ShowMenu();
+	sMenu.GetAnswer();
 
-	Usuario* usuarios = new Usuario[quantidade]; //array de usuários com [quantidade] elementos. ponteiro do tipo Usuario.
+	int userMenuChoice = sMenu.getIndex();
+	int userMenuNumber = sMenu.getNumber();
 
-	for (int i=0; i < quantidade; i++) {
-		std::cout << "## Usuario " << i << " ##" << std::endl;
-		usuarios[i].gerarDados();
-		std::cout << "Nome:     " << usuarios[i].getNome() << std::endl;
-		std::cout << "Cpf:      " << usuarios[i].getCpf() << std::endl;
-		std::cout << "Telefone: " << usuarios[i].getTelefone() << std::endl;
-		std::cout << " " << std::endl;
+	User *users = new User[userMenuNumber];
+	string FirstNamePath = "../source/names/first_names.txt";
+	string LastNamePath = "../source/names/last_names.txt";
+
+	switch (userMenuChoice)
+	{
+	case 1:
+		// O usuario escolheu gerar dados para a tabela usuario
+		for (int i = 0; i < userMenuNumber; i++)
+		{
+			users[i].generateData(FirstNamePath, LastNamePath);
+			cout << "" << endl;
+			cout << "### USER " << i << " ## " << endl;
+			cout << "NAME: " << users[i].getName() << endl;
+			cout << "CPF: " << users[i].getCpf() << endl;
+			cout << "PHONE: " << users[i].getPhone() << endl;
+			cout << "Admin: " << users[i].getAdmin() << endl;
+		}
+
+		delete[] users;
+		break;
+	case 2:
+		// O usuario escolheu gerar dados para a tabela veiculos
+		break;
+	case 3:
+		// O usuario escolheu gerar dados para a tablea diario de bordo
+		break;
+	default:
+		// Opcao invalida
+		break;
 	}
-*/
+
 	return 0;
 }
-

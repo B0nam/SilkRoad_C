@@ -2,3 +2,6 @@
 #include <iostream>
 #include <ctime>
 #include <cstring>
+#include <fstream>
+
+using namespace std;
