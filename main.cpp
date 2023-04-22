@@ -1,7 +1,11 @@
 #include "source/headers.h"
+#include "models/Menu.cpp"
 #include "models/Usuario.cpp"
 
 int main(){
+	Menu sMenu;
+
+/*
 	srand(time(NULL));
 
 	int quantidade = 5;
@@ -16,7 +20,7 @@ int main(){
 		std::cout << "Telefone: " << usuarios[i].getTelefone() << std::endl;
 		std::cout << " " << std::endl;
 	}
-
+*/
 	return 0;
 }
 
