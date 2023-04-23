@@ -36,6 +36,9 @@ int main()
 			string lastName = sManagerLastName.getRandomLine();
 
 			users[i].generateName(firtsName, lastName);
+			users[i].generateCPF();
+			users[i].generatePhone();
+			users[i].generateAdmin();
 			cout << "" << endl;
 			cout << "### USER " << i << " ## " << endl;
 			cout << "NAME: " << users[i].getName() << endl;
