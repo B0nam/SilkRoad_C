@@ -22,6 +22,7 @@ int main()
 	FileManager sManagerLastName;
 
 	User *users = new User[userMenuNumber];
+	Vehicle *vehicles = new Vehicle[userMenuNumber];
 
 	switch (userMenuChoice)
 	{
@@ -49,6 +50,21 @@ int main()
 		break;
 	case 2:
 		// O usuario escolheu gerar dados para a tabela veiculos
+		for (int i = 0; i < userMenuNumber; i++)
+		{
+			vehicles[i].generateRenavam();
+			vehicles[i].generatePlate();
+			vehicles[i].generateType();
+			vehicles[i].generateModelYear();
+			vehicles[i].generateEntraceYear();
+			cout << "" << endl;
+			cout << "### VEHICLE " << i << " ## " << endl;
+			cout << "RENAVAM: " << vehicles[i].getRenavam() << endl;
+			cout << "PLATE: " << vehicles[i].getPlate() << endl;
+			cout << "TYPE ID: " << vehicles[i].getType() << endl;
+			cout << "MODEL YEAR: " << vehicles[i].getModelYear() << endl;
+			cout << "ENTRACE YEAR: " << vehicles[i].getEntraceYear() << endl;
+		}
 		break;
 	case 3:
 		// O usuario escolheu gerar dados para a tablea diario de bordo
@@ -57,7 +73,7 @@ int main()
 		// Opcao invalida
 		break;
 	}
-
 	delete[] users;
+
 	return 0;
 }
