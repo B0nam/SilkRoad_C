@@ -42,10 +42,10 @@ int main()
 			users[i].generateAdmin();
 			cout << "" << endl;
 			cout << "### USER " << i << " ## " << endl;
-			cout << "NAME: " << users[i].getName() << endl;
-			cout << "CPF: " << users[i].getCpf() << endl;
-			cout << "PHONE: " << users[i].getPhone() << endl;
-			cout << "Admin: " << users[i].getAdmin() << endl;
+			cout << "[+] Gerado NAME: : " << users[i].getName() << endl;
+			cout << "[+] Gerado CPF: " << users[i].getCpf() << endl;
+			cout << "[+] Gerado PHONE: " << users[i].getPhone() << endl;
+			cout << "[+] Gerado Admin: " << users[i].getAdmin() << endl;
 		}
 		break;
 	case 2:
@@ -59,11 +59,11 @@ int main()
 			vehicles[i].generateEntraceYear();
 			cout << "" << endl;
 			cout << "### VEHICLE " << i << " ## " << endl;
-			cout << "RENAVAM: " << vehicles[i].getRenavam() << endl;
-			cout << "PLATE: " << vehicles[i].getPlate() << endl;
-			cout << "TYPE ID: " << vehicles[i].getType() << endl;
-			cout << "MODEL YEAR: " << vehicles[i].getModelYear() << endl;
-			cout << "ENTRACE YEAR: " << vehicles[i].getEntraceYear() << endl;
+			cout << "[+] Gerado RENAVAM: " << vehicles[i].getRenavam() << endl;
+			cout << "[+] Gerado PLATE: " << vehicles[i].getPlate() << endl;
+			cout << "[+] Gerado TYPE ID: " << vehicles[i].getType() << endl;
+			cout << "[+] Gerado MODEL YEAR: " << vehicles[i].getModelYear() << endl;
+			cout << "[+] Gerado ENTRACE YEAR: " << vehicles[i].getEntraceYear() << endl;
 		}
 		break;
 	case 3:

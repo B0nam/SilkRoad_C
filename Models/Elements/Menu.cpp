@@ -64,15 +64,15 @@ public:
         {
         case 1: // usuario
             cout << " " << endl;
-            cout << "Gerando " << number << " Usuarios. " << endl;
+            cout << "-_- Gerando " << number << " Usuarios. -_-" << endl;
             break;
         case 2: // veiculo
             cout << " " << endl;
-            cout << "Gerando " << number << " Veiculos. " << endl;
+            cout << "-_- Gerando " << number << " Veiculos. -_-" << endl;
             break;
         case 3: // diario de bordo
             cout << " " << endl;
-            cout << "Gerando " << number << " Diarios. " << endl;
+            cout << "-_- Gerando " << number << " Diarios. -_-" << endl;
             break;
         }
     }
