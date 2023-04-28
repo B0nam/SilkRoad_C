@@ -1,6 +1,7 @@
 #include "Source/headers.h"
 #include "Models/Elements/Menu.cpp"
-#include "Models/Elements/FileManager.cpp"
+#include "Models/Elements/DataFileManager.cpp" // Gerencia os arquivos que contem informações usadas para gerar dados.
+#include "Models/Elements/SQLFileManager.cpp"
 #include "Models/Entities/User.cpp"
 #include "Models/Entities/Vehicle.cpp"
 
@@ -69,11 +70,17 @@ int main()
 	case 3:
 		// O usuario escolheu gerar dados para a tablea diario de bordo
 		break;
+	case 4:
+		SQLFileManager sSQLManager;
+		sSQLManager.setFilePath("../GeneratedData");
+		sSQLManager.fetchDateTime();
 	default:
 		// Opcao invalida
 		break;
 	}
+
 	delete[] users;
+	delete[] vehicles;
 
 	return 0;
 }

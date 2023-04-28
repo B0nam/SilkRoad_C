@@ -37,12 +37,13 @@ public:
         cout << "(1) Usuario." << endl;
         cout << "(2) Veiculos." << endl;
         cout << "(3) Diario de bordo." << endl;
+        cout << "(4) DEBUG." << endl;
     }
 
     void GetAnswer()
     {
         // escolha das opcoes
-        while (_index == 0 || _index > 3)
+        while (_index == 0 || _index > 4)
         {
             cout << "Opcao: ";
             cin >> _index;
@@ -73,6 +74,10 @@ public:
         case 3: // diario de bordo
             cout << " " << endl;
             cout << "-_- Gerando " << number << " Diarios. -_-" << endl;
+            break;
+        case 4: // DEBUG
+            cout << "" << endl;
+            cout << "-_- DEBUG -_-";
             break;
         }
     }
