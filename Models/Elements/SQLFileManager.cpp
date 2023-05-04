@@ -1,13 +1,18 @@
 class SQLFileManager
 {
 private:
-    string _FilePath;
+    string _GeneratedFilesPath;
     string _CreationDate;
 
 public:
     void setFilePath(string path)
     {
-        _FilePath = path;
+        _GeneratedFilesPath = path;
+    }
+    
+    string getFilePath()
+    {
+        return _GeneratedFilesPath;
     }
 
     void setCreationDate(string date)
@@ -20,22 +25,31 @@ public:
         return _CreationDate;
     }
 
-    string fetchDateTime()
+    void fetchDateTime()
     {
         time_t actualTime = time(nullptr);
 
-        string dateTimeStr = ctime(&now);
-        string dateStr = dateTimeStr.substr(0, 10);
-        string timeStr = dateTimeStr.substr(0, 10);
+        //string dateTimeStr = ctime(&actualTime);
+        tm timeinfo = *localtime(&actualTime);
 
-        cout << dateTimeStr << endl;
+        ostringstream oss;
+        oss << put_time(&timeinfo, "%Y-%m-%d_%H:%M:%S");
 
-        return creationDateTime;
+        string formated = oss.str();
+
+        setCreationDate(formated);
     }
 
-    void createFile()
+    void createFolder()
     {
-        string createPath = path + creationDate;
-        filesystem::create_directory(path + this < -getCreationDate())
+        if (!filesystem::exists(getFilePath())) // Verifica a existencia do Diretório GeneratedFiles
+        {
+            cout << "O ARQUIVO NÃO EXISTE" << endl;
+            filesystem::create_directory(getFilePath()); // Caso não exista, o mesmo é criado
+        } else {
+            cout << "O ARQUIVO EXISTE ------" << endl;
+        }
+        string folderName = getFilePath() + getCreationDate();
+        filesystem::create_directory(folderName);
     }
 };

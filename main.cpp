@@ -16,8 +16,9 @@ int main()
 	int userMenuChoice = sMenu.getIndex();
 	int userMenuNumber = sMenu.getNumber();
 
-	string FirstNamePath = "../source/names/first_names.txt";
-	string LastNamePath = "../source/names/last_names.txt";
+	string FirstNamePath = "../Source/names/first_names.txt";
+	string LastNamePath = "../Source/names/last_names.txt";
+	string GeneratedFilesPath = "../GeneratedFiles";
 
 	FileManager sManagerFirstName;
 	FileManager sManagerLastName;
@@ -72,10 +73,9 @@ int main()
 		break;
 	case 4:
 		SQLFileManager sSQLManager;
-		sSQLManager.setFilePath("../GeneratedData");
+		sSQLManager.setFilePath(GeneratedFilesPath);
 		sSQLManager.fetchDateTime();
-	default:
-		// Opcao invalida
+		sSQLManager.createFolder();
 		break;
 	}
 
