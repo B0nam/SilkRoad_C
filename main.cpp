@@ -1,30 +1,35 @@
-#include "Source/headers.h"
-#include "Models/Elements/Menu.cpp"
-#include "Models/Elements/DataFileManager.cpp" // Gerencia os arquivos que contem informações usadas para gerar dados.
-#include "Models/Elements/SQLFileManager.cpp"
-#include "Models/Entities/User.cpp"
-#include "Models/Entities/Vehicle.cpp"
+#include "Source/headers.h"						// Headers necessários para o funcionamento do programa.
+#include "Models/Elements/Menu.cpp"				// Gerencia o menu do programa.
+#include "Models/Elements/DataFileManager.cpp"	// Gerencia os arquivos que contem informações usadas para gerar dados.
+#include "Models/Elements/SQLFileManager.cpp"	// Gerencia os arquivos gerados pelo programa que serão usados no banco de dados.
+#include "Models/Entities/User.cpp"				// Gerencia a geração de dados do tipo usuário.
+#include "Models/Entities/Vehicle.cpp"			// Gerencia a geração de dados do tipo veículo.
 
 int main()
 {
-	srand(time(NULL));
+	srand(time(NULL));							// Define um seed para a função rand().
 
-	Menu sMenu;
-	sMenu.ShowMenu();
-	sMenu.GetAnswer();
+	Menu sMenu;													// Criação do objeto sMenu.
+	sMenu.ShowMenu();											// Apresentação do Menu.
+	sMenu.GetAnswer();											// Obtem a resposta do usuário.
 
-	int userMenuChoice = sMenu.getIndex();
-	int userMenuNumber = sMenu.getNumber();
+	int userMenuChoice = sMenu.getIndex();						// Armazena o tipo de dado a ser gerado do usuário.
+	int userMenuNumber = sMenu.getNumber();						// Armazena a quantidade de dados que serão gerados.
 
-	string FirstNamePath = "../Source/names/first_names.txt";
-	string LastNamePath = "../Source/names/last_names.txt";
-	string GeneratedFilesPath = "../GeneratedFiles";
+	string FirstNamePath = "../Source/names/first_names.txt";	// Define o localização do arquivo que contem os nomes.
+	string LastNamePath = "../Source/names/last_names.txt";		// Define o localização do arquivo que contem os sobrenomes.
+	string GeneratedFilesPath = "GeneratedFiles";				// Define a localização do diretório que irá conter os dados gerados.
 
-	FileManager sManagerFirstName;
-	FileManager sManagerLastName;
+	FileManager sManagerFirstName;								// Criação do objeto que gerencia os primeiros nomes.
+	FileManager sManagerLastName;								// Criação do objeto que gerencia os sobrenomes.
 
-	User *users = new User[userMenuNumber];
+	User *users = new User[userMenuNumber];						
 	Vehicle *vehicles = new Vehicle[userMenuNumber];
+
+	SQLFileManager sSQLManager;
+	sSQLManager.setFilePath(GeneratedFilesPath);
+	sSQLManager.fetchDateTime();
+	sSQLManager.createFolder();
 
 	switch (userMenuChoice)
 	{
@@ -72,10 +77,7 @@ int main()
 		// O usuario escolheu gerar dados para a tablea diario de bordo
 		break;
 	case 4:
-		SQLFileManager sSQLManager;
-		sSQLManager.setFilePath(GeneratedFilesPath);
-		sSQLManager.fetchDateTime();
-		sSQLManager.createFolder();
+
 		break;
 	}
 
