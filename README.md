@@ -13,5 +13,6 @@ Após gerado a imagem, execute o conteíner expondo a porta 1433 para o localhos
 `docker run -p 1433:1433 <nome da imagem>`
 
 O usuário para acesso ao banco é o padrão da imagem docker base, já a senha, pode ser alterada através do Dockerfile.
+
 Usuário: sa
 Senha: Abacate123
