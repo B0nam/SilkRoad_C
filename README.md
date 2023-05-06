@@ -11,7 +11,8 @@ Para o banco de dados, o mesmo possui uma imagem docker o qual permite que tenha
 `docker buid -t <nome da imagem> .`.<br>
 
 #### Após gerado a imagem, execute o conteíner expondo a porta 1433 para o localhost:
-`docker run -p 1433:1433 <nome da imagem>`<br>
+`docker run --rm -p 1433:1433 <nome da imagem>`<br>
+(use a opção --rm para remover todos os componentes do conteiner quando o mesmo for finalizado, desta forma não haverá problemas relacionados ao VOLUME)<br>
 
 #### O usuário para acessar o banco de dados é o padrão da imagem docker base, já a senha, pode ser alterada através do Dockerfile.
 
