@@ -3,14 +3,14 @@ Repositório criado para armazenar seeder de dadis escrito em linguagem C/C++ pa
 
 O código presente neste repositório está adapatado ao banco GESTAOFRATA de nosso trabalho.
 
-Para o banco de dados, o mesmo possui uma imagem docker o qual permite que tenhamos acesso a estutura do banco em poucos minutos de forma simples.<br>
+
 
 ## Para realizar o deploy do bando de dados, siga os passos abaixo:
-
-Crie a imagem a partido do Dockerfile fornecido no repositorio:<br>
+Para o banco de dados, o mesmo possui uma imagem docker o qual permite que tenhamos acesso a estutura do banco em poucos minutos de forma simples.<br>
+#### Crie a imagem a partido do Dockerfile fornecido no repositorio:
 `docker buid -t <nome da imagem> .`.<br>
 
-Após gerado a imagem, execute o conteíner expondo a porta 1433 para o localhost:<br>
+#### Após gerado a imagem, execute o conteíner expondo a porta 1433 para o localhost:
 `docker run -p 1433:1433 <nome da imagem>`<br>
 
 #### O usuário para acessar o banco de dados é o padrão da imagem docker base, já a senha, pode ser alterada através do Dockerfile.
