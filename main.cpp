@@ -16,8 +16,8 @@ int main()
 	int userMenuChoice = sMenu.getIndex();						// Armazena o tipo de dado a ser gerado do usuário.
 	int userMenuNumber = sMenu.getNumber();						// Armazena a quantidade de dados que serão gerados.
 
-	string FirstNamePath = "../Source/names/first_names.txt";	// Define o localização do arquivo que contem os nomes.
-	string LastNamePath = "../Source/names/last_names.txt";		// Define o localização do arquivo que contem os sobrenomes.
+	string FirstNamePath = "Source/names/first_names.txt";	// Define o localização do arquivo que contem os nomes.
+	string LastNamePath = "Source/names/last_names.txt";		// Define o localização do arquivo que contem os sobrenomes.
 	string GeneratedFilesPath = "GeneratedFiles";				// Define a localização do diretório que irá conter os dados gerados.
 
 	FileManager sManagerFirstName;								// Criação do objeto que gerencia os primeiros nomes.
@@ -37,8 +37,7 @@ int main()
 		sManagerFirstName.startManager(FirstNamePath); // Obtem as linhas do primeiro arquivo.
 		sManagerLastName.startManager(LastNamePath);   // Obtem as linhas do segundo arquivo.
 
-		// Gera os dados
-		for (int i = 0; i < userMenuNumber; i++)
+		for (int i = 0; i < userMenuNumber; i++) // Chama os metodos de acordo com a quantidade.
 		{
 			string firtsName = sManagerFirstName.getRandomLine();
 			string lastName = sManagerLastName.getRandomLine();
@@ -48,7 +47,7 @@ int main()
 			users[i].generatePhone();
 			users[i].generateAdmin();
 			cout << "" << endl;
-			cout << "### USER " << i << " ## " << endl;
+			cout << "### USER " << (i+1) << " ## " << endl;
 			cout << "[+] Gerado NAME: : " << users[i].getName() << endl;
 			cout << "[+] Gerado CPF: " << users[i].getCpf() << endl;
 			cout << "[+] Gerado PHONE: " << users[i].getPhone() << endl;
@@ -65,7 +64,7 @@ int main()
 			vehicles[i].generateModelYear();
 			vehicles[i].generateEntraceYear();
 			cout << "" << endl;
-			cout << "### VEHICLE " << i << " ## " << endl;
+			cout << "### VEHICLE " << (i+1) << " ## " << endl;
 			cout << "[+] Gerado RENAVAM: " << vehicles[i].getRenavam() << endl;
 			cout << "[+] Gerado PLATE: " << vehicles[i].getPlate() << endl;
 			cout << "[+] Gerado TYPE ID: " << vehicles[i].getType() << endl;
@@ -77,7 +76,16 @@ int main()
 		// O usuario escolheu gerar dados para a tablea diario de bordo
 		break;
 	case 4:
-
+	// DEBUGGGGGGGGGGGG
+        ifstream file(FirstNamePath);
+        if (file.is_open())
+        {
+            file.close();
+        }
+        else
+        {
+            cout << "ERRO ao abrir arquivo: " << FirstNamePath << endl;
+        }
 		break;
 	}
 
