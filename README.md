@@ -1,5 +1,5 @@
 # SilkRoad_C
-Repositório criado para armazenar seeder de dadis escrito em linguagem C/C++ para o trabalho do 3 semestre da faculdade de engenharia de software. O programa em questão , gera uma sequancia de dados aleatórios para o banco de dados da aplicação principal. <br>
+Repositório criado para armazenar seeder de dados escrito em linguagem C/C++ para o trabalho do 3 semestre da faculdade de engenharia de software. O programa em questão , gera uma sequancia de dados aleatórios para o banco de dados da aplicação principal. <br>
 
 O código presente neste repositório está adapatado ao banco GESTAOFRATA de nosso trabalho.
 
