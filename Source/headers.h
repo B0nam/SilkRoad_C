@@ -5,5 +5,6 @@
 #include <fstream>
 #include <sstream>
 #include <filesystem>
+#include <sql.h>
 
 using namespace std;
