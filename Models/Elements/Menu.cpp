@@ -77,7 +77,7 @@ public:
             break;
         case 4: // DEBUG
             cout << "" << endl;
-            cout << "-_- DEBUG -_-";
+            cout << "-_- DEBUG -_-" << endl;
             break;
         }
     }

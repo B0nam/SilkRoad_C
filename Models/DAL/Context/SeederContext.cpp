@@ -12,22 +12,22 @@ class SeederContext
         {
             if (SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &hEnv) != SQL_SUCCESS)
             {
-                cout << "Error to Alloc enviroment handler";
-                endHandler();
+                cout << " --------- [env] Error to Alloc enviroment handler ---------" << endl;
+                //endHandler();
             }
             if (SQLAllocHandle(SQL_HANDLE_DBC, hEnv, &hDbc) != SQL_SUCCESS)
             {
-                cout << "Error to Alloc Connection handler ";
-                endHandler();
+                cout << " --------- [dbc] Error to Alloc enviroment handler ---------" << endl;
+                //endHandler();
             }
             if (SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt) != SQL_SUCCESS)
             {
-                cout << "Error to Alloc Statement handler ";
-                endHandler();
+                cout << " --------- [stmt] Error to Alloc enviroment handler ---------" << endl;
+                //endHandler();
             }
         }
         
-        void endHandler(int choice) // Finaliza o Handler.
+        void endHandler() // Finaliza o Handler.
         {
             SQLFreeHandle(SQL_HANDLE_STMT, hStmt);
             SQLFreeHandle(SQL_HANDLE_DBC, hDbc);

@@ -6,5 +6,6 @@
 #include <sstream>
 #include <filesystem>
 #include <sql.h>
+#include <sqlext.h>
 
 using namespace std;
