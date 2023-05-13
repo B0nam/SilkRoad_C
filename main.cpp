@@ -17,8 +17,8 @@ int main()
 	int userMenuChoice = sMenu.getIndex();						// Armazena o tipo de dado a ser gerado do usuário.
 	int userMenuNumber = sMenu.getNumber();						// Armazena a quantidade de dados que serão gerados.
 
-	string FirstNamePath = "../Source/names/first_names.txt";	// Define o localização do arquivo que contem os nomes.
-	string LastNamePath = "../Source/names/last_names.txt";		// Define o localização do arquivo que contem os sobrenomes.
+	string FirstNamePath = "Source/names/first_names.txt"; 	    // Define o localização do arquivo que contem os nomes.
+	string LastNamePath = "Source/names/last_names.txt";		// Define o localização do arquivo que contem os sobrenomes.
 	string GeneratedFilesPath = "GeneratedFiles";				// Define a localização do diretório que irá conter os dados gerados.
 
 	FileManager sManagerFirstName;								// Criação do objeto que gerencia os primeiros nomes.
@@ -82,7 +82,9 @@ int main()
 	case 4:
 		sSeederContext.startHandler();
 		sSeederContext.startConnection();
-		//sSeederContext.endHandler();
+		sSeederContext.makeQuery("SELECT 1");
+		sSeederContext.endConnection();
+		sSeederContext.endHandler();
 		break;
 	}
 
