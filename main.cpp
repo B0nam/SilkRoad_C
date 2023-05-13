@@ -80,11 +80,13 @@ int main()
 		// O usuario escolheu gerar dados para a tablea diario de bordo
 		break;
 	case 4:
+	/*
 		sSeederContext.startHandler();
 		sSeederContext.startConnection();
 		sSeederContext.makeQuery("SELECT 1");
 		sSeederContext.endConnection();
 		sSeederContext.endHandler();
+	*/
 		break;
 	}
 
