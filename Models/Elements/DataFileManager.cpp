@@ -1,4 +1,4 @@
-class FileManager
+class DataFileManager
 {
 private:
     string _FilePath;

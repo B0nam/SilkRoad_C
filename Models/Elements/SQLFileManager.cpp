@@ -3,6 +3,7 @@ class SQLFileManager
 private:
     string _GeneratedFilesPath;
     string _CreationDate;
+    string _folderName;
 
 public:
     void setFilePath(string path)
@@ -47,16 +48,35 @@ public:
             filesystem::create_directory(getFilePath()); // Caso não exista, o mesmo é criado
         }
 
-        string folderName = getFilePath() + "/" + getCreationDate(); // Gera um nome de diretório com a data atual para armazenar os arquivos gerados
 
-        if (!filesystem::exists(folderName)) // Verifica a existencia da pasta com a data atual.
+
+        _folderName = getFilePath() + "/" + getCreationDate(); // Gera um nome de diretório com a data atual para armazenar os arquivos gerados
+        string includePath = _folderName + "/Include";
+        string removePath = _folderName + "/Remove";
+
+        if (!filesystem::exists(_folderName)) // Verifica a existencia da pasta com a data atual.
         {
-            filesystem::create_directory(folderName); // Caso não exista, o mesmo é criado.
+            filesystem::create_directory(_folderName); // Caso não exista, o mesmo é criado.
+            filesystem::create_directory(includePath);  // Cria o diretório para incluir dados.
+            filesystem::create_directory(removePath);   // Cria o diretório para excluir dados.
         }
     }
-
-    void createFile() // Responsável por criar os arquivos contendo os códigos SQL
+    
+    void createScriptFiles()
     {
+        ostringstream includeScript;
+        ostringstream removeScript;
+    
+        time_t currentTime = time(nullptr);
+        tm* localTime = localtime(&currentTime);
 
+        ostringstream timeStr;
+        timeStr << put_time(localTime, "%H%M%S");
+
+        includeScript << _folderName << "/Include/" << timeStr.str() << ".sql";
+        removeScript << _folderName << "/Remove/" << timeStr.str() << ".sql";
+
+        ofstream includeFile(includeScript.str());
+        ofstream removeFile(removeScript.str());
     }
 };

@@ -21,16 +21,17 @@ int main()
 	string LastNamePath = "Source/names/last_names.txt";		// Define o localização do arquivo que contem os sobrenomes.
 	string GeneratedFilesPath = "GeneratedFiles";				// Define a localização do diretório que irá conter os dados gerados.
 
-	FileManager sManagerFirstName;								// Criação do objeto que gerencia os primeiros nomes.
-	FileManager sManagerLastName;								// Criação do objeto que gerencia os sobrenomes.
+	DataFileManager sManagerFirstName;								// Criação do objeto que gerencia os primeiros nomes.
+	DataFileManager sManagerLastName;								// Criação do objeto que gerencia os sobrenomes.
 
 	User *users = new User[userMenuNumber];						
 	Vehicle *vehicles = new Vehicle[userMenuNumber];
 
-	SQLFileManager sSQLManager;
-	sSQLManager.setFilePath(GeneratedFilesPath);
-	sSQLManager.fetchDateTime();
-	sSQLManager.createFolder();
+	SQLFileManager sSQLFileManager;
+	sSQLFileManager.setFilePath(GeneratedFilesPath);
+	sSQLFileManager.fetchDateTime();
+	sSQLFileManager.createFolder();
+	sSQLFileManager.createScriptFiles();
 
 	SeederContext sSeederContext;
 
@@ -39,6 +40,8 @@ int main()
 	case 1:
 		sManagerFirstName.startManager(FirstNamePath); // Obtem as linhas do primeiro arquivo.
 		sManagerLastName.startManager(LastNamePath);   // Obtem as linhas do segundo arquivo.
+
+		
 
 		// Gera os dados
 		for (int i = 0; i < userMenuNumber; i++)
@@ -50,12 +53,6 @@ int main()
 			users[i].generateCPF();
 			users[i].generatePhone();
 			users[i].generateAdmin();
-			cout << "" << endl;
-			cout << "### USER " << i << " ## " << endl;
-			cout << "[+] Gerado NAME: : " << users[i].getName() << endl;
-			cout << "[+] Gerado CPF: " << users[i].getCpf() << endl;
-			cout << "[+] Gerado PHONE: " << users[i].getPhone() << endl;
-			cout << "[+] Gerado Admin: " << users[i].getAdmin() << endl;
 		}
 		break;
 	case 2:

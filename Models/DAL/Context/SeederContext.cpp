@@ -9,17 +9,17 @@ private:
     
     SQLRETURN retCode = SQL_SUCCESS;   // Código de retorno
 
-    std::string _OptionDriver = "{ODBC Driver 17 for SQL Server}";   // Driver ODBC.
-    std::string _OptionServer = "127.0.0.1";                          // Server name.
-    std::string _OptionDatabase = "master";                          // Database name.
-    std::string _OptionUID = "sa";                                   // User name.
-    std::string _OptionPWD = "Abacate123";                           // User password.
+    string _OptionDriver = "{ODBC Driver 17 for SQL Server}";   // Driver ODBC.
+    string _OptionServer = "127.0.0.1";                          // Server name.
+    string _OptionDatabase = "master";                          // Database name.
+    string _OptionUID = "sa";                                   // User name.
+    string _OptionPWD = "Abacate123";                           // User password.
 
-    std::string _OptionsODBCO;
+    string _OptionsODBCO;
 public:
-    std::string setOptions() // Define as opções
+    string setOptions() // Define as opções
     {
-        std::ostringstream config;
+        ostringstream config;
         config << "DRIVER=" << _OptionDriver << ";"
             << "SERVER=" << _OptionServer << ";"
             << "DATABASE=" << _OptionDatabase << ";"
@@ -44,7 +44,7 @@ public:
 
     void startConnection() {
             SQLCHAR connStr[1024];
-            const std::string options = setOptions();
+            const string options = setOptions();
         
         if (options.length() < sizeof(connStr))
         {
