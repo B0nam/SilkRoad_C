@@ -81,6 +81,7 @@ int main()
 		break;
 	case 4:
 		sSeederContext.startHandler();
+		sSeederContext.startConnection();
 		//sSeederContext.endHandler();
 		break;
 	}
