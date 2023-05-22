@@ -6,6 +6,8 @@
 #include "Models/Entities/Vehicle.cpp"			// Gerencia a geração de dados do tipo veículo.
 #include "Models/DAL/Context/SeederContext.cpp" // Gerencia a conexão do programa com o servidor mssql
 
+// g++ -std=c++17 main.cpp -o programa
+
 int main()
 {
 	srand(time(NULL));							// Define um seed para a função rand().

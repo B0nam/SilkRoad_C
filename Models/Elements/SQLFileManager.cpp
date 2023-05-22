@@ -4,7 +4,8 @@ private:
     string _GeneratedFilesPath;
     string _CreationDate;
     string _folderName;
-
+    string _InsertName;
+    string _RemoveName;
 public:
     void setFilePath(string path)
     {
@@ -14,6 +15,26 @@ public:
     string getFilePath()
     {
         return _GeneratedFilesPath;
+    }
+
+    void setRemoveName(string fileName)
+    {
+        _RemoveName = fileName;
+    }
+    
+    string getRemoveName()
+    {
+        return _RemoveName;
+    }
+
+    void setInsertName(string fileName)
+    {
+        _InsertName = fileName;
+    }
+    
+    string getInsertName()
+    {
+        return _InsertName;
     }
 
     void setCreationDate(string date)
@@ -66,7 +87,7 @@ public:
     {
         ostringstream includeScript;
         ostringstream removeScript;
-    
+
         time_t currentTime = time(nullptr);
         tm* localTime = localtime(&currentTime);
 
@@ -75,6 +96,9 @@ public:
 
         includeScript << _folderName << "/Include/" << timeStr.str() << ".sql";
         removeScript << _folderName << "/Remove/" << timeStr.str() << ".sql";
+
+        setInsertName(includeScript.str());
+        setRemoveName(removeScript.str());
 
         ofstream includeFile(includeScript.str());
         ofstream removeFile(removeScript.str());

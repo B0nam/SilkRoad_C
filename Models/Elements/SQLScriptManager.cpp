@@ -19,4 +19,44 @@
 class SQLScriptManager{
     private:
     public:
+      int openQueryFiles(string fileNameInsert, string fileNameRemove)
+      {
+            ofstream queryFileInsert(fileNameInsert); // Abre o arquivo para escrita
+            ofstream queryFileRemove(fileNameRemove); // Abre o arquivo para escrita
+
+            if (queryFileInsert.is_open()) {
+                  // queryFile << "INSERT INTO " << tableName << "(" << columnName << ")" << "VALUES" << "(" << generatedData << ")\n" ;
+                  // queryFile.close(); // Fecha o arquivo
+            } else {
+                  std::cout << "Erro ao abrir o arquivo Insert." << std::endl;
+                  closeQueryFiles();
+                  return 0;
+            } if (queryFileRemove.is_open()) {
+                  // queryFile << "INSERT INTO " << tableName << "(" << columnName << ")" << "VALUES" << "(" << generatedData << ")\n" ;
+                  // queryFile.close(); // Fecha o arquivo
+            } else {
+                  std::cout << "Erro ao abrir o arquivo Remove." << std::endl;
+                  closeQueryFiles();
+                  return 0;
+            }
+      return 1;
+      }
+
+      int closeQueryFiles()
+      {
+            queryFileInsert.close();
+            queryFileRemove.close();
+            cout << "Arquivos fechados com sucesso." << endl;
+      }
+
+      generateInsertQuery(string InsertName)
+      {
+            queryFile << "INSERT INTO " << tableName << "(" << columnName << ")" << "VALUES" << "(" << generatedData << ")\n" ;
+      }
+
+      generateRemoveQuery(string InsertName)
+      {
+            //queryFile << "INSERT INTO " << tableName << "(" << columnName << ")" << "VALUES" << "(" << generatedData << ")\n" ;
+      }
+
 };
