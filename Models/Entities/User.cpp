@@ -5,7 +5,7 @@ private:
 	string _Name = "";
 	string _CPF = "";
 	string _Phone = "";
-	bool _Admin = false;
+	string _Admin = "";
 
 public:
 	string getName() // getter name
@@ -23,7 +23,7 @@ public:
 		return _Phone;
 	}
 
-	bool getAdmin() // getter admin
+	string getAdmin() // getter admin
 	{
 		return _Admin;
 	}
@@ -112,11 +112,11 @@ public:
 	{
 		if ((rand() % 2) == 1)
 		{
-			this->_Admin = true;
+			this->_Admin = "1";
 		}
 		else
 		{
-			this->_Admin = false;
+			this->_Admin = "0";
 		}
 	}
 };

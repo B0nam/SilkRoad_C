@@ -1,3 +1,4 @@
+//#include "../DAL/Context/SeederContext.cpp"
 /*
  Responsavel por montar os scripts que inserem e removem os dados gerados.
  O ideal é seguir o seguinte fluxo:
@@ -18,45 +19,56 @@
 
 class SQLScriptManager{
     private:
+      ofstream queryFileInsert;
+      ofstream queryFileRemove;
+      string _DBName;
     public:
+
+      void setDBName(string DBName)
+      {
+            _DBName = DBName;
+      }
+
+      string getDBName()
+      {
+            return _DBName;
+      }
+
       int openQueryFiles(string fileNameInsert, string fileNameRemove)
       {
-            ofstream queryFileInsert(fileNameInsert); // Abre o arquivo para escrita
-            ofstream queryFileRemove(fileNameRemove); // Abre o arquivo para escrita
+            queryFileInsert.open(fileNameInsert); // Abre o arquivo para escrita
+            queryFileRemove.open(fileNameRemove); // Abre o arquivo para escrita
 
-            if (queryFileInsert.is_open()) {
-                  // queryFile << "INSERT INTO " << tableName << "(" << columnName << ")" << "VALUES" << "(" << generatedData << ")\n" ;
-                  // queryFile.close(); // Fecha o arquivo
+            if (queryFileInsert.is_open())
+            {
+                  cout << "Arquivo Insert aberto com sucesso." << endl;
+                  queryFileInsert << "USE " << _DBName << ";\n";
             } else {
-                  std::cout << "Erro ao abrir o arquivo Insert." << std::endl;
-                  closeQueryFiles();
-                  return 0;
-            } if (queryFileRemove.is_open()) {
-                  // queryFile << "INSERT INTO " << tableName << "(" << columnName << ")" << "VALUES" << "(" << generatedData << ")\n" ;
-                  // queryFile.close(); // Fecha o arquivo
-            } else {
-                  std::cout << "Erro ao abrir o arquivo Remove." << std::endl;
-                  closeQueryFiles();
+                  cout << "Erro ao abrir o arquivo Insert." << endl;
                   return 0;
             }
+
+            if (queryFileRemove.is_open()) 
+            {
+                  cout << "Arquivo Remove aberto com sucesso." << endl;
+                  queryFileRemove << "USE " << _DBName << ";\n";
+            } else {
+                  cout << "Erro ao abrir o arquivo Remove." << endl;
+                  queryFileInsert.close(); // Fecha o arquivo Insert aberto
+            return 0;
+            }
+      // Ambos os arquivos foram abertos com sucesso
       return 1;
       }
 
-      int closeQueryFiles()
-      {
-            queryFileInsert.close();
-            queryFileRemove.close();
-            cout << "Arquivos fechados com sucesso." << endl;
-      }
 
-      generateInsertQuery(string InsertName)
+      void generateQuerys(string tableName, string columnName, string generatedData)
       {
-            queryFile << "INSERT INTO " << tableName << "(" << columnName << ")" << "VALUES" << "(" << generatedData << ")\n" ;
+            // Insert
+            queryFileInsert << "INSERT INTO " << tableName << "(" << columnName << ")" << "VALUES" << "(" << generatedData << ");\n" ;
+      
+            // Remove
+            queryFileRemove << "DELETE FROM " << tableName << "WHERE" << columnName << " = " << generatedData << ");\n" ;
+      
       }
-
-      generateRemoveQuery(string InsertName)
-      {
-            //queryFile << "INSERT INTO " << tableName << "(" << columnName << ")" << "VALUES" << "(" << generatedData << ")\n" ;
-      }
-
 };

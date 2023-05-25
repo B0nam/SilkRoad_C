@@ -9,15 +9,26 @@ private:
     
     SQLRETURN retCode = SQL_SUCCESS;   // Código de retorno
 
-    string _OptionDriver = "{ODBC Driver 17 for SQL Server}";   // Driver ODBC.
-    string _OptionServer = "127.0.0.1";                          // Server name.
-    string _OptionDatabase = "master";                          // Database name.
-    string _OptionUID = "sa";                                   // User name.
-    string _OptionPWD = "Abacate123";                           // User password.
+    string _OptionDriver;   // Driver ODBC.
+    string _OptionServer;                          // Server name.
+    string _OptionDatabase;                          // Database name.
+    string _OptionUID;                                   // User name.
+    string _OptionPWD;                           // User password.
 
     string _OptionsODBCO;
 public:
-    string setOptions() // Define as opções
+
+    void setOptions(string OptionDriver, string OptionServer, string OptionDatabase, string OptionUID, string OptionPWD)
+    {
+        _OptionDriver = OptionDriver;
+        _OptionServer = OptionServer;
+        _OptionDatabase = OptionDatabase;
+        _OptionUID = OptionUID;
+        _OptionPWD = OptionPWD;
+        applyOptions();
+    }
+
+    string applyOptions() // Define as opções
     {
         ostringstream config;
         config << "DRIVER=" << _OptionDriver << ";"
@@ -29,6 +40,9 @@ public:
         return config.str();
     }
 
+    string getOptionDatabase(){
+        return _OptionDatabase;
+    }
 
     void startHandler()  // Inicializa o Handler.
     {
@@ -44,7 +58,7 @@ public:
 
     void startConnection() {
             SQLCHAR connStr[1024];
-            const string options = setOptions();
+            const string options = applyOptions();
         
         if (options.length() < sizeof(connStr))
         {

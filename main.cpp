@@ -4,7 +4,8 @@
 #include "Models/Elements/SQLFileManager.cpp"	// Gerencia os arquivos gerados pelo programa que serão usados no banco de dados.
 #include "Models/Entities/User.cpp"				// Gerencia a geração de dados do tipo usuário.
 #include "Models/Entities/Vehicle.cpp"			// Gerencia a geração de dados do tipo veículo.
-#include "Models/DAL/Context/SeederContext.cpp" // Gerencia a conexão do programa com o servidor mssql
+#include "Models/DAL/Context/SeederContext.cpp" // Gerencia a conexão do programa com o servidor mssql.
+#include "Models/Elements/SQLScriptManager.cpp" // Gerencia a criação e escrita dos scripts sql include e remove.
 
 // g++ -std=c++17 main.cpp -o programa
 
@@ -23,38 +24,55 @@ int main()
 	string LastNamePath = "Source/names/last_names.txt";		// Define o localização do arquivo que contem os sobrenomes.
 	string GeneratedFilesPath = "GeneratedFiles";				// Define a localização do diretório que irá conter os dados gerados.
 
-	DataFileManager sManagerFirstName;								// Criação do objeto que gerencia os primeiros nomes.
-	DataFileManager sManagerLastName;								// Criação do objeto que gerencia os sobrenomes.
+	DataFileManager sManagerFirstName;							// Criação do objeto que gerencia os primeiros nomes.
+	DataFileManager sManagerLastName;							// Criação do objeto que gerencia os sobrenomes.
 
-	User *users = new User[userMenuNumber];						
-	Vehicle *vehicles = new Vehicle[userMenuNumber];
+	User *users = new User[userMenuNumber];						// Criação dos Objetos Usuário.
+	Vehicle *vehicles = new Vehicle[userMenuNumber];			// Criação dos objetos Veículo.
 
-	SQLFileManager sSQLFileManager;
-	sSQLFileManager.setFilePath(GeneratedFilesPath);
-	sSQLFileManager.fetchDateTime();
-	sSQLFileManager.createFolder();
-	sSQLFileManager.createScriptFiles();
+	SQLFileManager sSQLFileManager;								// Criação do objeto que gerencia os arquivos com os scripts .sql.
+	sSQLFileManager.setFilePath(GeneratedFilesPath);			// Define o Path onde os arquivos gerados serão armazenados.
+	sSQLFileManager.fetchDateTime();							// Obtem o tempo atual.
+	sSQLFileManager.createFolder();								// Cria o diretorio dos scripts.
+	sSQLFileManager.createScriptFiles();						// Cria os scripts no diretório.
 
-	SeederContext sSeederContext;
+	SeederContext sSeederContext;								// Criação do objeto que gerencia a cconexão do programa com o servidor SQL
+	sSeederContext.setOptions(
+		"{ODBC Driver 17 for SQL Server}",
+		"127.0.0.1",
+		"master",
+		"sa",
+		"Abacate123"
+		);
+
+	SQLScriptManager sSQLScriptManager;							// Criação do objeto que gerencia o conteúdo dos arquivos scripts
+	sSQLScriptManager.setDBName("master");						// NOME BANCO ONDE O SCRIPT É EXECUTADO
 
 	switch (userMenuChoice)
 	{
 	case 1:
-		sManagerFirstName.startManager(FirstNamePath); // Obtem as linhas do primeiro arquivo.
-		sManagerLastName.startManager(LastNamePath);   // Obtem as linhas do segundo arquivo.
+		sManagerFirstName.startManager(FirstNamePath);		// Obtem as linhas do primeiro arquivo.
+		sManagerLastName.startManager(LastNamePath);   		// Obtem as linhas do segundo arquivo.
 
-		
+		sSQLScriptManager.openQueryFiles(sSQLFileManager.getInsertName(), sSQLFileManager.getRemoveName());
 
-		// Gera os dados
 		for (int i = 0; i < userMenuNumber; i++)
 		{
 			string firtsName = sManagerFirstName.getRandomLine();
 			string lastName = sManagerLastName.getRandomLine();
+			string nomeTabela = "vehicle";
+
 
 			users[i].generateName(firtsName, lastName);
 			users[i].generateCPF();
 			users[i].generatePhone();
 			users[i].generateAdmin();
+
+
+			sSQLScriptManager.generateQuerys(nomeTabela, "NOMECOLUNA", users[i].getName());
+			sSQLScriptManager.generateQuerys(nomeTabela, "NOMECOLUNA", users[i].getCpf());
+			sSQLScriptManager.generateQuerys(nomeTabela, "NOMECOLUNA", users[i].getPhone());
+			sSQLScriptManager.generateQuerys(nomeTabela, "NOMECOLUNA", users[i].getAdmin());
 		}
 		break;
 	case 2:
@@ -79,6 +97,7 @@ int main()
 		// O usuario escolheu gerar dados para a tablea diario de bordo
 		break;
 	case 4:
+
 	/*
 		sSeederContext.startHandler();
 		sSeederContext.startConnection();
