@@ -5,7 +5,7 @@ O código presente neste repositório está adapatado ao banco GESTAOFRATA de no
 
 
 
-## Para realizar o deploy do bando de dados, siga os passos abaixo:
+## Para realizar o deploy do banco de dados, siga os passos abaixo:
 Para o banco de dados, o mesmo possui uma imagem docker o qual permite que tenhamos acesso a estutura do banco em poucos minutos de forma simples.<br>
 #### Crie a imagem a partido do Dockerfile fornecido no repositorio:
 `docker buid -t <nome da imagem> .`.<br>
