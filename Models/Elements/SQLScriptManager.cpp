@@ -65,7 +65,7 @@ class SQLScriptManager{
       void generateQuerys(string tableName, string columnName, string generatedData)
       {
             // Insert
-            queryFileInsert << "INSERT INTO " << tableName << "(" << columnName << ")" << "VALUES" << "(" << generatedData << ");\n" ;
+            queryFileInsert << "INSERT INTO " << tableName << "(" << columnName << ")" << "VALUES" << "(\"" << generatedData << "\");\n" ;
       
             // Remove
             queryFileRemove << "DELETE FROM " << tableName << "WHERE" << columnName << " = " << generatedData << ");\n" ;

@@ -15,7 +15,6 @@ int main()
 
 	Menu sMenu;													// Criação do objeto sMenu.
 	sMenu.ShowMenu();											// Apresentação do Menu.
-	sMenu.GetAnswer();											// Obtem a resposta do usuário.
 
 	int userMenuChoice = sMenu.getIndex();						// Armazena o tipo de dado a ser gerado do usuário.
 	int userMenuNumber = sMenu.getNumber();						// Armazena a quantidade de dados que serão gerados.
@@ -60,7 +59,7 @@ int main()
 		{
 			string firtsName = sManagerFirstName.getRandomLine();
 			string lastName = sManagerLastName.getRandomLine();
-			string nomeTabela = "vehicle";
+			string nomeTabela = "Users";
 
 
 			users[i].generateName(firtsName, lastName);
@@ -68,11 +67,17 @@ int main()
 			users[i].generatePhone();
 			users[i].generateAdmin();
 
+			cout << "" << endl;
+			cout << "### USERS " << i << " ## " << endl;
+			cout << "[+] Gerado NOME: " << users[i].getName() << endl;
+			cout << "[+] Gerado CPF: " << users[i].getCpf() << endl;
+			cout << "[+] Gerado PHONE: " << users[i].getPhone() << endl;
+			cout << "[+] Gerado ADMIN: " << users[i].getAdmin() << endl;
 
-			sSQLScriptManager.generateQuerys(nomeTabela, "NOMECOLUNA", users[i].getName());
-			sSQLScriptManager.generateQuerys(nomeTabela, "NOMECOLUNA", users[i].getCpf());
-			sSQLScriptManager.generateQuerys(nomeTabela, "NOMECOLUNA", users[i].getPhone());
-			sSQLScriptManager.generateQuerys(nomeTabela, "NOMECOLUNA", users[i].getAdmin());
+			sSQLScriptManager.generateQuerys(nomeTabela, "Name", users[i].getName());
+			sSQLScriptManager.generateQuerys(nomeTabela, "Cpf", users[i].getCpf());
+			sSQLScriptManager.generateQuerys(nomeTabela, "phone", users[i].getPhone());
+			sSQLScriptManager.generateQuerys(nomeTabela, "Admin", users[i].getAdmin());
 		}
 		break;
 	case 2:
