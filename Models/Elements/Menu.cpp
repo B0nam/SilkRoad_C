@@ -33,8 +33,36 @@ public:
         return _number;
     }
 
+    int getServerConnection()
+    {
+        return _serverConnection;
+    }
+
+    string getDatabaseAddress()
+    {
+        return _databaseAddress;
+    }
+
+    string getDatabaseName()
+    {
+        return _databaseName;
+    }
+
+
+    string getDatabaseUsername()
+    {
+        return _databaseUsername;
+    }
+
+    string getDatabasePassword()
+    {
+        return _databasePassword;
+    }
+
     void ShowMenu()
     {
+        int saveInfo = 0;
+
         cout << " " << endl;
         cout << "-------------------------------------------------------------------------" << endl;
         cout << "Seeder de dados para banco mySQL - Software feito para trabalho ESOFT3S" << endl;
@@ -50,26 +78,42 @@ public:
             cout << " " << endl;
         }
 
-        if (_serverConnection == 1) {
+        if (_serverConnection == 1)
+        {
             cout << "[ Digite as informações do servidor MSSQL: ]" << endl;
             cout << "Endereço do servidor: ";
             cin  >> _databaseAddress;
-            cout << "Usuário: " << endl;
+            cout << "Usuário: ";
             cin  >> _databaseUsername;
-            cout << "Senha: " << endl;
+            cout << "Senha: ";
             cin  >> _databasePassword;
-            // cout << "Deseja savar estas informações? (S/N)" << endl;
-            // do {
-            //     cin >> _serverConnection;
+            // cout << "Deseja salvar estas informações? (1 = Sim | 2 = Não)" << endl;
+            // while (saveInfo == 0 || saveInfo > 2)
+            // {
+            //     cin >> saveInfo;
             // }
-            // while (_serverConnection != "s" || _serverConnection != "S" || _serverConnection != "n" || _serverConnection != "N");
-
         }
+
+        // if (saveInfo == 1)
+        // {
+        //     ofstream includeFile(user.cfg);       // Cria o arquivo de CFG
+        //     queryFileInsert.open("user.cfg"); // Abre o arquivo para escrita
+            
+        //     if (queryFileInsert.is_open())
+        //     {
+        //           cout << "Arquivo de configuração aberto com sucesso." << endl;
+        //     } else {
+        //           cout << "Erro ao abrir o arquivo Insert." << endl;
+        //           return 0;
+        //     }
+        // }
+
+        cout << " " << endl;
         cout << "[ Informações do banco de dados ]" << endl;
         cout << "Digite o nome do banco de dados: " << endl;
         cout << "nome: ";
         cin  >> _databaseName;
-        cout " " << endl;
+        cout << " " << endl;
 
         cout << "[ Escolha o tipo de dado que sera gerado: ]" << endl;
         cout << "(1) Usuario." << endl;

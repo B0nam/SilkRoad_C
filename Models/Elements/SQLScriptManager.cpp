@@ -62,13 +62,21 @@ class SQLScriptManager{
       }
 
 
-      void generateQuerys(string tableName, string columnName, string generatedData)
+      void generateQuerys(string tableName, string columnName, string generatedData, bool isString)
       {
-            // Insert
-            queryFileInsert << "INSERT INTO " << tableName << "(" << columnName << ")" << "VALUES" << "(\"" << generatedData << "\");\n" ;
+            if (isString == true){
+                  // Insert
+                  queryFileInsert << "INSERT INTO " << tableName << "(" << columnName << ")" << "VALUES" << "(" << generatedData << ");\n" ;
       
-            // Remove
-            queryFileRemove << "DELETE FROM " << tableName << "WHERE" << columnName << " = " << generatedData << ");\n" ;
+                  // Remove
+                  queryFileRemove << "DELETE FROM " << tableName << "WHERE" << columnName << " = " << generatedData << ");\n" ;
+            }
+            else {
+                  // Insert
+                  queryFileInsert << "INSERT INTO " << tableName << "(" << columnName << ")" << "VALUES" << "(\"" << generatedData << "\");\n" ;
       
+                  // Remove
+                  queryFileRemove << "DELETE FROM " << tableName << "WHERE" << columnName << " = " << generatedData << ");\n" ;
+            }
       }
 };

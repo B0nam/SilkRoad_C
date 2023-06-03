@@ -80,7 +80,7 @@ public:
         }
     }
 
-    void makeQuery(string query)
+    void sendQuery(string query)
     {
         retCode = SQLAllocHandle(SQL_HANDLE_STMT, hDbc, &hStmt);
 
@@ -101,6 +101,25 @@ public:
         }
         endConnection();
         endHandler();
+    }
+
+    int sendScriptQuerys(string filename)
+    {
+        ifstream file(filename);
+        string line;
+
+        if (file.is_open())
+        {
+            cout << "Arquivo script aberto com sucesso." << endl;
+            while (getline(file, line)) {
+                sendQuery(line);
+            }
+        file.close();
+        return 1;
+        } else {
+            cout << "Erro ao abrir o arquivo script." << endl;
+            return -1;
+        }
     }
 
     void endHandler() // Finaliza o Handler.

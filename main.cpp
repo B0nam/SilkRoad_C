@@ -35,17 +35,22 @@ int main()
 	sSQLFileManager.createFolder();								// Cria o diretorio dos scripts.
 	sSQLFileManager.createScriptFiles();						// Cria os scripts no diretório.
 
-	SeederContext sSeederContext;								// Criação do objeto que gerencia a cconexão do programa com o servidor SQL
-	sSeederContext.setOptions(
-		"{ODBC Driver 17 for SQL Server}",
-		"127.0.0.1",
-		"master",
-		"sa",
-		"Abacate123"
-		);
-
 	SQLScriptManager sSQLScriptManager;							// Criação do objeto que gerencia o conteúdo dos arquivos scripts
 	sSQLScriptManager.setDBName("master");						// NOME BANCO ONDE O SCRIPT É EXECUTADO
+
+
+	SeederContext sSeederContext;								// Criação do objeto que gerencia a cconexão do programa com o servidor SQL
+
+	if (sMenu.getServerConnection() == 1)
+	{
+		sSeederContext.setOptions(
+			"{ODBC Driver 17 for SQL Server}",
+			sMenu.getDatabaseAddress(),
+			sMenu.getDatabaseName(),
+			sMenu.getDatabaseUsername(),
+			sMenu.getDatabasePassword()
+		);
+	}
 
 	switch (userMenuChoice)
 	{
@@ -69,16 +74,27 @@ int main()
 
 			cout << "" << endl;
 			cout << "### USERS " << i << " ## " << endl;
-			cout << "[+] Gerado NOME: " << users[i].getName() << endl;
-			cout << "[+] Gerado CPF: " << users[i].getCpf() << endl;
+			cout << "[+] Gerado NOME:  " << users[i].getName() << endl;
+			cout << "[+] Gerado CPF:   " << users[i].getCpf() << endl;
 			cout << "[+] Gerado PHONE: " << users[i].getPhone() << endl;
 			cout << "[+] Gerado ADMIN: " << users[i].getAdmin() << endl;
 
-			sSQLScriptManager.generateQuerys(nomeTabela, "Name", users[i].getName());
-			sSQLScriptManager.generateQuerys(nomeTabela, "Cpf", users[i].getCpf());
-			sSQLScriptManager.generateQuerys(nomeTabela, "phone", users[i].getPhone());
-			sSQLScriptManager.generateQuerys(nomeTabela, "Admin", users[i].getAdmin());
+			sSQLScriptManager.generateQuerys(nomeTabela, "Name", users[i].getName(), true);
+			sSQLScriptManager.generateQuerys(nomeTabela, "Cpf", users[i].getCpf(), true);
+			sSQLScriptManager.generateQuerys(nomeTabela, "phone", users[i].getPhone(), true);
+			sSQLScriptManager.generateQuerys(nomeTabela, "Admin", users[i].getAdmin(), false);
 		}
+		cout << "[ --- Os dados foram gerados e salvos. --- ]" << endl;
+		if (sMenu.getServerConnection() == 1)
+		{
+			cout << "Aplicando dados ao servidor..." << endl;
+			sSeederContext.startHandler();
+			sSeederContext.startConnection();
+			sSeederContext.sendScriptQuerys(sSQLFileManager.getInsertName());
+			sSeederContext.endConnection();
+			sSeederContext.endHandler();
+		}
+
 		break;
 	case 2:
 		// O usuario escolheu gerar dados para a tabela veiculos
@@ -106,7 +122,7 @@ int main()
 	/*
 		sSeederContext.startHandler();
 		sSeederContext.startConnection();
-		sSeederContext.makeQuery("SELECT 1");
+		sSeederContext.sendQuery("SELECT 1");
 		sSeederContext.endConnection();
 		sSeederContext.endHandler();
 	*/
