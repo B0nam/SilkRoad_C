@@ -18,3 +18,16 @@ Para o banco de dados, o mesmo possui uma imagem docker o qual permite que tenha
 
 Usuário: sa<br>
 Senha: Abacate123<br>
+
+## Software em execução.
+![1](https://github.com/B0nam/SilkRoad_C/assets/85623265/f32fb26d-484c-49d9-b6fe-111cf721e9b8)
+Realizando a conexão com o banco de dados.
+
+![2](https://github.com/B0nam/SilkRoad_C/assets/85623265/2b40d89f-9f22-452c-a918-c6f29f091957)
+Escolhendo os dados a serem gerandos.
+
+![3](https://github.com/B0nam/SilkRoad_C/assets/85623265/0c95a025-7a1c-454a-b4af-3855178ed246)
+Script .sql gerado pelo software e inserido ao servidor conectado.
+
+# Software INCOMPLETO, talvez no futuro eu finalize este código.
+O programa foi realizado no inicio dos meus estudos em POO
